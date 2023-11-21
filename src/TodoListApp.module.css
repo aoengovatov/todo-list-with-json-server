@@ -1,5 +1,7 @@
 .container {
-  max-width: 1200px;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
   margin: 0 auto;
   padding: 15px;
 }
@@ -29,4 +31,20 @@
   100% {
     transform: rotate(360deg);
   }
+}
+
+.buttonAdd {
+  color: #f0e5e5;
+  font-size: 16px;
+  padding: 8px 30px;
+  background: #4923e0;
+  border: none;
+  border-radius: 8px;
+  margin: 5px auto;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.buttonAdd:hover {
+  background: #5838d9;
 }

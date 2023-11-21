@@ -7,6 +7,7 @@ export const TodoListApp = () => {
     <div className={styles.container}>
       <h1 className={styles.h1}>Список дел</h1>
       <CaseComponent>Подготовить новый стиль</CaseComponent>
+      <button className={styles.buttonAdd}>добавить</button>
     </div>
   )
 }
