@@ -1,0 +1,16 @@
+.searchContainer {
+  background: #d9d9d9;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.input {
+  border: none;
+  background: none;
+  padding: 0 12px 0 12px;
+  color: #211f1f;
+}
+
+.input:focus {
+  outline: none;
+}
