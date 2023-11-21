@@ -7,7 +7,7 @@
 }
 
 .h1 {
-  font-size: 28px;
+  font-size: 32px;
   margin-bottom: 7px;
 }
 
@@ -47,4 +47,10 @@
 
 .buttonAdd:hover {
   background: #5838d9;
+}
+
+.topBarContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
