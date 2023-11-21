@@ -1,0 +1,21 @@
+.caseContainer {
+  display: flex;
+  padding: 10px;
+  padding-left: 14px;
+  background: rgb(234, 230, 230);
+  border-radius: 10px;
+  margin-bottom: 5px;
+}
+
+.label {
+  align-self: center;
+  width: 5px;
+  height: 5px;
+  border-radius: 100%;
+  background: #1972c4;
+  margin-right: 7px;
+}
+
+.title {
+  font-size: 16px;
+}
