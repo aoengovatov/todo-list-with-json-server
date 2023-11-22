@@ -33,25 +33,15 @@
   }
 }
 
-.buttonAdd {
-  color: #5838d9;
-  font-size: 16px;
-  padding: 8px 30px;
-  background: #fff;
-  border: 2px solid #5838d9;
-  border-radius: 8px;
-  margin: 5px auto;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.buttonAdd:hover {
-  background: #4923e0;
-  color: #f0e5e5;
-}
-
 .topBarContainer {
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
+}
+
+@media (max-width: 500px) {
+  .topBarContainer {
+    flex-direction: column;
+    width: fit-content;
+  }
 }
