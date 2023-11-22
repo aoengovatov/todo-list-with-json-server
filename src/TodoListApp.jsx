@@ -12,7 +12,11 @@ export const TodoListApp = () => {
         <SortComponent />
         <SearchComponent />
       </div>
-      <CaseComponent>Подготовить новый стиль</CaseComponent>
+      <CaseComponent>Новая задача</CaseComponent>
+      <CaseComponent>Новая задача</CaseComponent>
+      <CaseComponent>Новая задача</CaseComponent>
+      <CaseComponent>Новая задача</CaseComponent>
+      <CaseComponent>Новая задача</CaseComponent>
       <button className={styles.buttonAdd}>добавить</button>
     </div>
   )
