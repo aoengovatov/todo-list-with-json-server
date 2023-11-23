@@ -7,6 +7,7 @@ import { AddNewCaseComponent } from './components/AddNewCaseComponent/AddNewCase
 
 export const TodoListApp = () => {
   const [todos, setTodos] = useState([]);
+  const [refreshTodos, setRefreshTodos] = useState(false);
   //const [isLoading, setIsLoading] = useState(false);
   
   useEffect(() => {
@@ -18,7 +19,24 @@ export const TodoListApp = () => {
           setTodos(loadedTodos)
         });
         //.finally(() => setIsLoading(false));
-  }, []);
+  }, [refreshTodos]);
+
+  const addTodo = (value) => {
+    if (value !== undefined && value.trim() !== '') {
+      fetch('http://localhost:3005/todos', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json;charset=utf-8' },
+            body: JSON.stringify({
+                name: `${value}`,
+            }),
+        })
+            .then((rawResponse) => rawResponse.json())
+            .then((response) => {
+                console.log('Новая задача добавлена, ответ сервера:', response);
+                setRefreshTodos(!refreshTodos);
+            })
+    }
+  }
 
   return (
     <div className={styles.container}>
@@ -33,7 +51,7 @@ export const TodoListApp = () => {
         <CaseComponent key={id}>{name}</CaseComponent>
       ))}
       
-      <AddNewCaseComponent />
+      <AddNewCaseComponent addTodo={addTodo} />
     </div>
   )
 }
