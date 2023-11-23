@@ -2,7 +2,7 @@ import styles from './CaseComponent.module.css';
 import { EditCaseComponent } from '../EditCaseComponent/EditCaseComponent';
 import { DeleteCaseComponent } from '../DeleteCaseComponent/DeleteCaseComponent';
 
-export const CaseComponent = ({ children }) => {
+export const CaseComponent = ({ deleteTodo, id, children }) => {
 
     return (
         <div className={styles.caseContainer}>
@@ -12,7 +12,7 @@ export const CaseComponent = ({ children }) => {
             </div>
             <div className={styles.buttonContainer}>
                 <EditCaseComponent />
-                <DeleteCaseComponent />
+                <DeleteCaseComponent deleteTodo={deleteTodo} id={id}/>
             </div>
         </div>
     );

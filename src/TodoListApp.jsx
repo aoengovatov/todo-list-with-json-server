@@ -38,6 +38,17 @@ export const TodoListApp = () => {
     }
   }
 
+  const deleteTodo = (id) => {
+    fetch(`http://localhost:3005/todos/${id}`, {
+            method: 'DELETE',
+        })
+            .then((rawResponse) => rawResponse.json())
+            .then((response) => {
+                console.log('Задача удалена, ответ сервера: ', response);
+                setRefreshTodos(!refreshTodos);
+            });
+  }
+
   return (
     <div className={styles.container}>
       <h1 className={styles.h1}>Todo list</h1>
@@ -48,7 +59,7 @@ export const TodoListApp = () => {
 
       {todos.map(({id, name}) => 
       (
-        <CaseComponent key={id}>{name}</CaseComponent>
+        <CaseComponent key={id} deleteTodo={deleteTodo} id={id}>{name}</CaseComponent>
       ))}
       
       <AddNewCaseComponent addTodo={addTodo} />
