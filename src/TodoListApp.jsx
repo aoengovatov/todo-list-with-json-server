@@ -8,17 +8,17 @@ import { AddNewCaseComponent } from './components/AddNewCaseComponent/AddNewCase
 export const TodoListApp = () => {
   const [todos, setTodos] = useState([]);
   const [refreshTodos, setRefreshTodos] = useState(false);
-  //const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   
   useEffect(() => {
-    //setIsLoading(true);
+    setIsLoading(true);
 
     fetch('http://localhost:3005/todos')
         .then((loadedData) => loadedData.json())
         .then((loadedTodos) => {
           setTodos(loadedTodos)
-        });
-        //.finally(() => setIsLoading(false));
+        })
+        .finally(() => setIsLoading(false));
   }, [refreshTodos]);
 
   const addTodo = (value) => {
@@ -57,9 +57,11 @@ export const TodoListApp = () => {
         <SearchComponent />
       </div>
 
-      {todos.map(({id, name}) => 
+      {isLoading ? (<div className={styles.loader}></div>) : (
+        todos.map(({id, name}) => 
       (
         <CaseComponent key={id} deleteTodo={deleteTodo} id={id}>{name}</CaseComponent>
+      )
       ))}
       
       <AddNewCaseComponent addTodo={addTodo} />
