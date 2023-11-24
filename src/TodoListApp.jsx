@@ -9,6 +9,7 @@ export const TodoListApp = () => {
   const [todos, setTodos] = useState([]);
   const [refreshTodos, setRefreshTodos] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isSortTodos, setIsSortTodos] = useState(false);
   
   useEffect(() => {
     setIsLoading(true);
@@ -70,7 +71,7 @@ export const TodoListApp = () => {
     <div className={styles.container}>
       <h1 className={styles.h1}>Todo list</h1>
       <div className={styles.topBarContainer}>
-        <SortComponent />
+        <SortComponent isSort={isSortTodos} setSort={setIsSortTodos}/>
         <SearchComponent />
       </div>
 
