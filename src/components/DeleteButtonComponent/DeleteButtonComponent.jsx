@@ -1,6 +1,6 @@
-import styles from './DeleteCaseComponent.module.css';
+import styles from './DeleteButtonComponent.module.css';
 
-export const DeleteCaseComponent = ({ deleteTodo, id }) => {
+export const DeleteButtonComponent = ({ deleteTodo, id }) => {
    
     return (
         <div className={styles.deleteButton} onClick={() => deleteTodo(id)}>

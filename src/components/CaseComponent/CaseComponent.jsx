@@ -1,6 +1,6 @@
 import styles from './CaseComponent.module.css';
-import { EditCaseComponent } from '../EditCaseComponent/EditCaseComponent';
-import { DeleteCaseComponent } from '../DeleteCaseComponent/DeleteCaseComponent';
+import { EditButtonComponent } from '../EditButtonComponent/EditButtonComponent';
+import { DeleteButtonComponent } from '../DeleteButtonComponent/DeleteButtonComponent';
 
 export const CaseComponent = ({ deleteTodo, id, children }) => {
 
@@ -11,8 +11,8 @@ export const CaseComponent = ({ deleteTodo, id, children }) => {
                 <div className={styles.title}>{children}</div>
             </div>
             <div className={styles.buttonContainer}>
-                <EditCaseComponent />
-                <DeleteCaseComponent deleteTodo={deleteTodo} id={id}/>
+                <EditButtonComponent />
+                <DeleteButtonComponent deleteTodo={deleteTodo} id={id}/>
             </div>
         </div>
     );

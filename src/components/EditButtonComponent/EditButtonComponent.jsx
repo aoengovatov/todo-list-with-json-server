@@ -1,6 +1,6 @@
-import styles from './EditCaseComponent.module.css';
+import styles from './EditButtonComponent.module.css';
 
-export const EditCaseComponent = () => {
+export const EditButtonComponent = () => {
     return (
         <div className={styles.editButton}>
             <div className={styles.editIcon}></div>
