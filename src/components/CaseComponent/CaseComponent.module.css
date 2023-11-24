@@ -19,12 +19,13 @@
 
 .buttonContainer {
   display: flex;
+  align-items: center;
 }
 
 .label {
   align-self: center;
-  width: 5px;
-  height: 5px;
+  min-width: 5px;
+  min-height: 5px;
   border-radius: 100%;
   background: #5838d9;
   margin-right: 7px;
@@ -32,4 +33,31 @@
 
 .title {
   font-size: 16px;
+}
+
+.input {
+  background: none;
+  border: none;
+  color: rgba(19, 19, 19, 0.87);
+  font-size: 16px;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.actionButton {
+  border: 2px solid #5838d9;
+  background: transparent;
+  color: #5838d9;
+  font-size: 12px;
+  padding: 3px 10px;
+  margin-right: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.actionButton:hover {
+  color: white;
+  background: #5838d9;
 }

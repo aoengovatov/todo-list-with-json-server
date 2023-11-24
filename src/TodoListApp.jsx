@@ -27,7 +27,7 @@ export const TodoListApp = () => {
             method: 'POST',
             headers: { 'Content-Type': 'application/json;charset=utf-8' },
             body: JSON.stringify({
-                name: `${value}`,
+                name: `${value.trim()}`,
             }),
         })
             .then((rawResponse) => rawResponse.json())
@@ -49,6 +49,23 @@ export const TodoListApp = () => {
             });
   }
 
+  const updateTodo = (id, name) => {
+    if (name !== undefined && name.trim() !== '') {
+      fetch(`http://localhost:3005/todos/${id}`, {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json;charset=utf-8' },
+              body: JSON.stringify({
+                  name: `${name.trim()}`,
+              }),
+          })
+              .then((rawResponse) => rawResponse.json())
+              .then((response) => {
+                  console.log('Задача обновлена, ответ сервера:', response);
+                  setRefreshTodos(!refreshTodos);
+              });
+    }
+  }
+
   return (
     <div className={styles.container}>
       <h1 className={styles.h1}>Todo list</h1>
@@ -60,7 +77,7 @@ export const TodoListApp = () => {
       {isLoading ? (<div className={styles.loader}></div>) : (
         todos.map(({id, name}) => 
       (
-        <CaseComponent key={id} deleteTodo={deleteTodo} id={id}>{name}</CaseComponent>
+        <CaseComponent key={id} deleteTodo={deleteTodo} updateTodo={updateTodo} id={id}>{name}</CaseComponent>
       )
       ))}
       
