@@ -77,7 +77,12 @@ export const TodoListApp = () => {
       {isLoading ? (<div className={styles.loader}></div>) : (
         todos.map(({id, name}) => 
       (
-        <CaseComponent key={id} deleteTodo={deleteTodo} updateTodo={updateTodo} id={id}>{name}</CaseComponent>
+        <CaseComponent 
+          key={id} 
+          deleteTodo={deleteTodo} 
+          updateTodo={updateTodo} 
+          id={id}>{name}
+        </CaseComponent>
       )
       ))}
       
