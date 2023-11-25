@@ -1,9 +1,11 @@
 import styles from './TodoListApp.module.css';
 import { useState, useEffect } from 'react';
-import { CaseComponent } from './components/CaseComponent/CaseComponent';
-import { SortComponent } from './components/SortComponent/SortComponent';
-import { SearchComponent } from './components/SearchComponent/SearchComponent';
-import { AddNewCaseComponent } from './components/AddNewCaseComponent/AddNewCaseComponent';
+import { 
+  CaseComponent, 
+  SortComponent, 
+  SearchComponent, 
+  AddNewCaseComponent 
+  } from './components';
 
 export const TodoListApp = () => {
   const [todos, setTodos] = useState([]);
@@ -17,7 +19,12 @@ export const TodoListApp = () => {
     fetch('http://localhost:3005/todos')
         .then((loadedData) => loadedData.json())
         .then((loadedTodos) => {
-          setTodos(loadedTodos)
+          if (isSortTodos) {
+            setTodos(loadedTodos
+              .sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase())));
+          } else {
+            setTodos(loadedTodos);
+          }
         })
         .finally(() => setIsLoading(false));
   }, [refreshTodos]);
@@ -67,11 +74,16 @@ export const TodoListApp = () => {
     }
   }
 
+  const setSortTodos = (value) => {
+    setIsSortTodos(value);
+    setRefreshTodos(!refreshTodos);
+  }
+
   return (
     <div className={styles.container}>
       <h1 className={styles.h1}>Todo list</h1>
       <div className={styles.topBarContainer}>
-        <SortComponent isSort={isSortTodos} setSort={setIsSortTodos}/>
+        <SortComponent isSort={isSortTodos} setSort={setSortTodos}/>
         <SearchComponent />
       </div>
 

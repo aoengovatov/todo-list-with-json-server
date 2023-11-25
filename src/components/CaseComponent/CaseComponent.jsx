@@ -2,7 +2,6 @@ import styles from './CaseComponent.module.css';
 import { useState } from 'react';
 import { EditButtonComponent } from '../EditButtonComponent/EditButtonComponent';
 import { DeleteButtonComponent } from '../DeleteButtonComponent/DeleteButtonComponent';
-//import { EditCaseComponent } from '../EditCaseComponent/EditCaseComponent';
 
 export const CaseComponent = ({ deleteTodo, updateTodo, id, children }) => {
     const [isEdit, setIsEdit] = useState(false);
