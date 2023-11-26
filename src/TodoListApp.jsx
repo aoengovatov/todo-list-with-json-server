@@ -9,6 +9,7 @@ import {
 
 export const TodoListApp = () => {
   const [todos, setTodos] = useState([]);
+  const [todosSearch, setTodosSearch] = useState([]);
   const [refreshTodos, setRefreshTodos] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isSortTodos, setIsSortTodos] = useState(false);
@@ -79,25 +80,50 @@ export const TodoListApp = () => {
     setRefreshTodos(!refreshTodos);
   }
 
+  const setSearchValue = (value) => {
+    let searchTodos = [];
+
+    if (value !== '') {
+      todos.map(todo => 
+        todo.name.toLowerCase().includes(value.toLowerCase()) 
+          ? searchTodos.push(todo) 
+          : false
+      );
+    }
+    setTodosSearch(searchTodos);
+  }
+
   return (
     <div className={styles.container}>
       <h1 className={styles.h1}>Todo list</h1>
       <div className={styles.topBarContainer}>
         <SortComponent isSort={isSortTodos} setSort={setSortTodos}/>
-        <SearchComponent />
+        <SearchComponent setSearchValue={setSearchValue}/>
       </div>
 
-      {isLoading ? (<div className={styles.loader}></div>) : (
-        todos.map(({id, name}) => 
-      (
-        <CaseComponent 
-          key={id} 
-          deleteTodo={deleteTodo} 
-          updateTodo={updateTodo} 
-          id={id}>{name}
-        </CaseComponent>
-      )
-      ))}
+      {isLoading ? (
+        <div className={styles.loader}></div>
+      ) : (
+        todosSearch.length !== 0 ? todosSearch.map(({id, name}) => 
+       (
+          <CaseComponent 
+            key={id} 
+            deleteTodo={deleteTodo} 
+            updateTodo={updateTodo} 
+            id={id}>{name}
+          </CaseComponent>
+        )) : (
+          todos.map(({id, name}) => 
+          (
+            <CaseComponent 
+              key={id} 
+              deleteTodo={deleteTodo} 
+              updateTodo={updateTodo} 
+              id={id}>{name}
+            </CaseComponent>
+          )            
+        ))
+      )}
       
       <AddNewCaseComponent addTodo={addTodo} />
     </div>
