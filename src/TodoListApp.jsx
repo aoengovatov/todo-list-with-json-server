@@ -1,6 +1,6 @@
 import styles from './TodoListApp.module.css';
 import { useState } from 'react';
-import { useRequestGetTodos, useRequestDeleteTodo } from './hooks';
+import { useRequestGetTodos, useRequestDeleteTodo, useRequestUpdateTodo } from './hooks';
 import {
   CaseComponent, 
   SortComponent, 
@@ -39,18 +39,7 @@ export const TodoListApp = () => {
 
   const updateTodo = (id, name) => {
     if (name !== undefined && name.trim() !== '') {
-      fetch(`http://localhost:3005/todos/${id}`, {
-              method: 'PUT',
-              headers: { 'Content-Type': 'application/json;charset=utf-8' },
-              body: JSON.stringify({
-                  name: `${name.trim()}`,
-              }),
-          })
-              .then((rawResponse) => rawResponse.json())
-              .then((response) => {
-                  console.log('Задача обновлена, ответ сервера:', response);
-                  setRefreshTodos(!refreshTodos);
-              });
+      useRequestUpdateTodo(id, setRefreshTodos, refreshTodos);
     }
   }
 
