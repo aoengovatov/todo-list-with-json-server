@@ -1,6 +1,7 @@
 import styles from './TodoListApp.module.css';
-import { useState, useEffect } from 'react';
-import { 
+import { useState } from 'react';
+import { useRequestGetTodos } from './hooks';
+import {
   CaseComponent, 
   SortComponent, 
   SearchComponent, 
@@ -8,27 +9,11 @@ import {
   } from './components';
 
 export const TodoListApp = () => {
-  const [todos, setTodos] = useState([]);
+  
   const [todosSearch, setTodosSearch] = useState([]);
   const [refreshTodos, setRefreshTodos] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [isSortTodos, setIsSortTodos] = useState(false);
-  
-  useEffect(() => {
-    setIsLoading(true);
-
-    fetch('http://localhost:3005/todos')
-        .then((loadedData) => loadedData.json())
-        .then((loadedTodos) => {
-          if (isSortTodos) {
-            setTodos(loadedTodos
-              .sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase())));
-          } else {
-            setTodos(loadedTodos);
-          }
-        })
-        .finally(() => setIsLoading(false));
-  }, [refreshTodos]);
+  const {isLoading, todos} = useRequestGetTodos(isSortTodos, refreshTodos);
 
   const addTodo = (value) => {
     if (value !== undefined && value.trim() !== '') {
