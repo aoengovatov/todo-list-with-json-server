@@ -1,6 +1,6 @@
 import styles from './TodoListApp.module.css';
 import { useState } from 'react';
-import { useRequestGetTodos } from './hooks';
+import { useRequestGetTodos, useRequestDeleteTodo } from './hooks';
 import {
   CaseComponent, 
   SortComponent, 
@@ -33,15 +33,9 @@ export const TodoListApp = () => {
   }
 
   const deleteTodo = (id) => {
-    fetch(`http://localhost:3005/todos/${id}`, {
-            method: 'DELETE',
-        })
-            .then((rawResponse) => rawResponse.json())
-            .then((response) => {
-                console.log('Задача удалена, ответ сервера: ', response);
-                setRefreshTodos(!refreshTodos);
-            });
+    useRequestDeleteTodo(id, setRefreshTodos, refreshTodos);
   }
+  
 
   const updateTodo = (id, name) => {
     if (name !== undefined && name.trim() !== '') {
