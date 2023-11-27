@@ -1,4 +1,9 @@
-export const useRequestUpdateTodo = (id, setRefreshTodos, refreshTodos) => {
+export const useRequestUpdateTodo = (
+  id,
+  name,
+  setRefreshTodos,
+  refreshTodos
+) => {
   fetch(`http://localhost:3005/todos/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json;charset=utf-8" },

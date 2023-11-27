@@ -1,6 +1,10 @@
 import styles from './TodoListApp.module.css';
 import { useState } from 'react';
-import { useRequestGetTodos, useRequestDeleteTodo, useRequestUpdateTodo } from './hooks';
+import { 
+  useRequestGetTodos, 
+  useRequestDeleteTodo, 
+  useRequestUpdateTodo,
+  useRequestAddTodo } from './hooks';
 import {
   CaseComponent, 
   SortComponent, 
@@ -9,7 +13,6 @@ import {
   } from './components';
 
 export const TodoListApp = () => {
-  
   const [todosSearch, setTodosSearch] = useState([]);
   const [refreshTodos, setRefreshTodos] = useState(false);
   const [isSortTodos, setIsSortTodos] = useState(false);
@@ -17,18 +20,7 @@ export const TodoListApp = () => {
 
   const addTodo = (value) => {
     if (value !== undefined && value.trim() !== '') {
-      fetch('http://localhost:3005/todos', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json;charset=utf-8' },
-            body: JSON.stringify({
-                name: `${value.trim()}`,
-            }),
-        })
-            .then((rawResponse) => rawResponse.json())
-            .then((response) => {
-                console.log('Новая задача добавлена, ответ сервера:', response);
-                setRefreshTodos(!refreshTodos);
-            })
+      useRequestAddTodo(value, setRefreshTodos, refreshTodos);
     }
   }
 
@@ -36,10 +28,9 @@ export const TodoListApp = () => {
     useRequestDeleteTodo(id, setRefreshTodos, refreshTodos);
   }
   
-
   const updateTodo = (id, name) => {
     if (name !== undefined && name.trim() !== '') {
-      useRequestUpdateTodo(id, setRefreshTodos, refreshTodos);
+      useRequestUpdateTodo(id, name, setRefreshTodos, refreshTodos);
     }
   }
 
