@@ -1,5 +1,6 @@
 import styles from './TodoListApp.module.css';
 import { useState } from 'react';
+import { SortContext } from './SortContext';
 import { 
   useRequestGetTodos, 
   useRequestDeleteTodo, 
@@ -56,10 +57,13 @@ export const TodoListApp = () => {
     <div className={styles.container}>
       <h1 className={styles.h1}>Todo list</h1>
       <div className={styles.topBarContainer}>
-        <SortComponent isSort={isSortTodos} setSort={setSortTodos}/>
+        <SortContext.Provider value={isSortTodos}>
+          <SortComponent setSort={setSortTodos}/>
+        </SortContext.Provider>
+        
         <SearchComponent setSearchValue={setSearchValue}/>
       </div>
-
+      
       {isLoading ? (
         <div className={styles.loader}></div>
       ) : (

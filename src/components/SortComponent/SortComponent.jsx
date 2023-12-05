@@ -1,6 +1,9 @@
 import styles from './SortComponent.module.css';
+import { SortContext } from '../../SortContext';
+import { useContext } from 'react';
 
-export const SortComponent = ({ isSort, setSort }) => {
+export const SortComponent = ({ setSort }) => {
+    const isSort = useContext(SortContext);
 
     return (
         <div className={styles.container}>
