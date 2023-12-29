@@ -4,3 +4,4 @@ export * from "./DeleteButtonComponent";
 export * from "./EditButtonComponent";
 export * from "./SearchComponent";
 export * from "./SortComponent";
+export * from "./CasesBarComponent";

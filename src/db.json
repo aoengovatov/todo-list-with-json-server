@@ -1,16 +1,16 @@
 {
   "todos": [
     {
-      "name": "first",
+      "name": "fir",
       "id": 1
-    },
-    {
-      "name": "last",
-      "id": 2
     },
     {
       "name": "А задача",
       "id": 3
+    },
+    {
+      "name": "qwer",
+      "id": 4
     }
   ]
 }
