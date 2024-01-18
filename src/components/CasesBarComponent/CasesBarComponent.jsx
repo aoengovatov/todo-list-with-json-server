@@ -1,13 +1,18 @@
 import { CaseComponent } from "../CaseComponent";
-import { TodosContext } from "../../TodosContext";
-import { useContext } from "react";
+import { useSelector } from "react-redux";
 
 export const CasesBarComponent = ({ deleteTodo, updateTodo }) => {
-    const todos = useContext(TodosContext);
+    const todos = useSelector((store) => store.todoState);
+    console.log(todos);
 
-    return todos.map(({ id, name }) => (
-        <CaseComponent key={id} deleteTodo={deleteTodo} updateTodo={updateTodo} id={id}>
-            {name}
+    return Object.entries(todos).map(([num, todo]) => (
+        <CaseComponent
+            key={todo.id}
+            deleteTodo={deleteTodo}
+            updateTodo={updateTodo}
+            id={todo.id}
+        >
+            {todo.name}
         </CaseComponent>
     ));
 };

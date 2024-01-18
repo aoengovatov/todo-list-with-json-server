@@ -1,13 +1,8 @@
 import styles from "./TodoListApp.module.css";
-import { useState } from "react";
-import { SortContext } from "./SortContext";
-import { TodosContext } from "./TodosContext";
-import {
-    useRequestGetTodos,
-    useRequestDeleteTodo,
-    useRequestUpdateTodo,
-    useRequestAddTodo,
-} from "./hooks";
+import { useState, useEffect } from "react";
+import { SortContext } from "./SortContext"; //заменить на store
+import { useDispatch, useSelector } from "react-redux";
+import { getTodos, addTodos, updateTodos, deleteTodos } from "./actions";
 import {
     SortComponent,
     SearchComponent,
@@ -16,45 +11,50 @@ import {
 } from "./components";
 
 export const TodoListApp = () => {
+    const dispatch = useDispatch();
     const [searchTodos, setSearchTodos] = useState([]);
-    const [refreshTodos, setRefreshTodos] = useState(false);
     const [isSortTodos, setIsSortTodos] = useState(false);
-    const { isLoading, todos } = useRequestGetTodos(isSortTodos, refreshTodos);
+    const [isLoading, setIsLoading] = useState(true);
     let todosOut = [];
+
+    useEffect(() => {
+        dispatch(getTodos());
+        setIsLoading(false);
+    }, []);
 
     const addTodo = (value) => {
         if (value !== undefined && value.trim() !== "") {
-            useRequestAddTodo(value, setRefreshTodos, refreshTodos);
+            dispatch(addTodos(value));
         }
     };
 
     const deleteTodo = (id) => {
-        useRequestDeleteTodo(id, setRefreshTodos, refreshTodos);
+        dispatch(deleteTodos(id));
     };
 
     const updateTodo = (id, name) => {
         if (name !== undefined && name.trim() !== "") {
-            useRequestUpdateTodo(id, name, setRefreshTodos, refreshTodos);
+            dispatch(updateTodos(id, name));
         }
     };
 
     const setSortTodos = (value) => {
         setIsSortTodos(value);
-        setRefreshTodos(!refreshTodos);
+        //setRefreshTodos(!refreshTodos);
     };
 
-    const updateTodos = () => {
+    const updatedTodos = () => {
         if (searchTodos.length !== 0) {
             todosOut = searchTodos;
         } else {
-            todosOut = todos;
+            todosOut = useSelector((store) => store.todoState);
         }
     };
 
     const setSearchValue = (value) => {
         let todosSearch = [];
         value
-            ? todos.map((todo) =>
+            ? useSelector((store) => store.todoState).map((todo) =>
                   todo.name.toLowerCase().includes(value.toLowerCase())
                       ? todosSearch.push(todo)
                       : null
@@ -63,7 +63,7 @@ export const TodoListApp = () => {
         setSearchTodos(todosSearch);
     };
 
-    updateTodos();
+    updatedTodos();
 
     return (
         <div className={styles.container}>
@@ -72,18 +72,14 @@ export const TodoListApp = () => {
                 <SortContext.Provider value={isSortTodos}>
                     <SortComponent setSort={setSortTodos} />
                 </SortContext.Provider>
-
                 <SearchComponent setSearchValue={setSearchValue} />
             </div>
 
             {isLoading ? (
                 <div className={styles.loader}></div>
             ) : (
-                <TodosContext.Provider value={todosOut}>
-                    <CasesBarComponent deleteTodo={deleteTodo} updateTodo={updateTodo} />
-                </TodosContext.Provider>
+                <CasesBarComponent deleteTodo={deleteTodo} updateTodo={updateTodo} />
             )}
-
             <AddNewCaseComponent addTodo={addTodo} />
         </div>
     );
