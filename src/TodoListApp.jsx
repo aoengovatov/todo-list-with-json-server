@@ -1,7 +1,6 @@
 import styles from "./TodoListApp.module.css";
 import { useState, useEffect } from "react";
-import { SortContext } from "./SortContext"; //заменить на store
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getTodos, addTodos, updateTodos, deleteTodos } from "./actions";
 import {
     SortComponent,
@@ -12,10 +11,7 @@ import {
 
 export const TodoListApp = () => {
     const dispatch = useDispatch();
-    //const [searchTodos, setSearchTodos] = useState([]);
-    //const [isSortTodos, setIsSortTodos] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
-    //let todosOut = [];
 
     useEffect(() => {
         dispatch(getTodos());
@@ -38,39 +34,12 @@ export const TodoListApp = () => {
         }
     };
 
-    /*const setSortTodos = (value) => {
-        setIsSortTodos(value);
-        //setRefreshTodos(!refreshTodos);
-    };*/
-
-    /*const updatedTodos = () => {
-        if (searchTodos.length !== 0) {
-            todosOut = searchTodos;
-        } else {
-            todosOut = useSelector((store) => store.todoState);
-        }
-    };*/
-
-    const setSearchValue = (value) => {
-        let todosSearch = [];
-        value
-            ? useSelector((store) => store.todoState).map((todo) =>
-                  todo.name.toLowerCase().includes(value.toLowerCase())
-                      ? todosSearch.push(todo)
-                      : null
-              )
-            : null;
-        setSearchTodos(todosSearch);
-    };
-
-    //updatedTodos();
-
     return (
         <div className={styles.container}>
             <h1 className={styles.h1}>Todo list</h1>
             <div className={styles.topBarContainer}>
                 <SortComponent />
-                <SearchComponent/>
+                <SearchComponent />
             </div>
 
             {isLoading ? (
