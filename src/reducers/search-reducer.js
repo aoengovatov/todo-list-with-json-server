@@ -1,8 +1,10 @@
+import { ACTION_TYPE } from "../constants/action-type";
+
 export const searchReducer = (state = { search: "" }, action) => {
     switch (action.type) {
-        case "GET_SEARCH":
+        case ACTION_TYPE.GET_SEARCH:
             return state;
-        case "UPDATE_SEARCH":
+        case ACTION_TYPE.UPDATE_SEARCH:
             return { search: action.payload };
         default:
             return state;

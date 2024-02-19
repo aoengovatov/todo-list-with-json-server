@@ -1,7 +1,7 @@
 import styles from "./TodoListApp.module.css";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { getTodos, addTodos, updateTodos, deleteTodos } from "./actions";
+import { getTodos, addTodos } from "./actions";
 import {
     SortComponent,
     SearchComponent,
@@ -16,21 +16,11 @@ export const TodoListApp = () => {
     useEffect(() => {
         dispatch(getTodos());
         setIsLoading(false);
-    }, []);
+    }, [dispatch]);
 
     const addTodo = (value) => {
         if (value !== undefined && value.trim() !== "") {
             dispatch(addTodos(value));
-        }
-    };
-
-    const deleteTodo = (id) => {
-        dispatch(deleteTodos(id));
-    };
-
-    const updateTodo = (id, name) => {
-        if (name !== undefined && name.trim() !== "") {
-            dispatch(updateTodos(id, name));
         }
     };
 
@@ -42,11 +32,7 @@ export const TodoListApp = () => {
                 <SearchComponent />
             </div>
 
-            {isLoading ? (
-                <div className={styles.loader}></div>
-            ) : (
-                <CasesBarComponent deleteTodo={deleteTodo} updateTodo={updateTodo} />
-            )}
+            {isLoading ? <div className={styles.loader}></div> : <CasesBarComponent />}
             <AddNewCaseComponent addTodo={addTodo} />
         </div>
     );

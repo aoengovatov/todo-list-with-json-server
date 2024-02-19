@@ -1,17 +1,21 @@
 import styles from "./CaseComponent.module.css";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { updateTodos, deleteTodos } from "../../actions";
 import { EditButtonComponent, DeleteButtonComponent } from "../../components";
+import { EditConfirnPanel } from "../EditConfirnPanel/EditConfirnPanel";
 
-export const CaseComponent = ({ deleteTodo, updateTodo, id, children }) => {
+export const CaseComponent = ({ id, children }) => {
     const [isEdit, setIsEdit] = useState(false);
     const [updateValue, setUpdateValue] = useState(children);
+    const dispatch = useDispatch();
 
     const editTodo = () => {
         setIsEdit(true);
         setUpdateValue(children);
     };
 
-    const cancleClick = () => {
+    const cancelClick = () => {
         setIsEdit(false);
     };
 
@@ -19,9 +23,15 @@ export const CaseComponent = ({ deleteTodo, updateTodo, id, children }) => {
         setUpdateValue(target.value);
     };
 
-    const updateCase = () => {
+    const updateClick = () => {
+        if (updateValue !== undefined && updateValue.trim() !== "") {
+            dispatch(updateTodos(id, updateValue));
+        }
         setIsEdit(false);
-        updateTodo(id, updateValue);
+    };
+
+    const deleteTodo = (id) => {
+        dispatch(deleteTodos(id));
     };
 
     return (
@@ -41,18 +51,14 @@ export const CaseComponent = ({ deleteTodo, updateTodo, id, children }) => {
             </div>
             <div className={styles.buttonContainer}>
                 {isEdit ? (
-                    <>
-                        <button className={styles.actionButton} onClick={updateCase}>
-                            ОК
-                        </button>
-                        <button className={styles.actionButton} onClick={cancleClick}>
-                            Отмена
-                        </button>
-                    </>
+                    <EditConfirnPanel
+                        updateClick={updateClick}
+                        cancelClick={cancelClick}
+                    />
                 ) : (
                     <>
-                        <EditButtonComponent editTodo={editTodo} />
-                        <DeleteButtonComponent deleteTodo={deleteTodo} id={id} />
+                        <EditButtonComponent onClick={() => editTodo()} />
+                        <DeleteButtonComponent onClick={() => deleteTodo(id)} />
                     </>
                 )}
             </div>

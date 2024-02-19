@@ -1,0 +1,16 @@
+.actionButton {
+    border: 1px solid #5838d9;
+    background: transparent;
+    color: #5838d9;
+    font-size: 12px;
+    padding: 4px 10px;
+    margin-left: 5px;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.actionButton:hover {
+    color: white;
+    background: #5838d9;
+}

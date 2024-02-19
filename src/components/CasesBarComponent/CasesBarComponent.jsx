@@ -1,11 +1,12 @@
+import { selectTodos, selectSearch, selectSort } from "../../selectors";
 import { CaseComponent } from "../CaseComponent";
 import { useSelector } from "react-redux";
 
-export const CasesBarComponent = ({ deleteTodo, updateTodo }) => {
-    const todosState = useSelector((store) => store.todoState);
+export const CasesBarComponent = () => {
+    const todosState = useSelector(selectTodos());
     let todos = todosState;
-    const search = useSelector((store) => store.searchState.search);
-    const isSort = useSelector((store) => store.sortState.sort);
+    const search = useSelector(selectSearch());
+    const isSort = useSelector(selectSort());
 
     const searchTodos = (value) => {
         let todosSearch = [];
@@ -34,8 +35,6 @@ export const CasesBarComponent = ({ deleteTodo, updateTodo }) => {
     return Object.entries(todos).map(([num, todo]) => (
         <CaseComponent
             key={todo.id}
-            deleteTodo={deleteTodo}
-            updateTodo={updateTodo}
             id={todo.id}
         >
             {todo.name}

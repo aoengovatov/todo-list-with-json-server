@@ -1,9 +1,9 @@
-import styles from './EditButtonComponent.module.css';
+import styles from "./EditButtonComponent.module.css";
 
-export const EditButtonComponent = ({ editTodo }) => {
+export const EditButtonComponent = ({ ...props }) => {
     return (
-        <div className={styles.editButton} onClick={editTodo}>
+        <div className={styles.editButton} {...props}>
             <div className={styles.editIcon}></div>
         </div>
-    )
-}
+    );
+};

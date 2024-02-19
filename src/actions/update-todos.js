@@ -1,3 +1,5 @@
+import { ACTION_TYPE } from "../constants/action-type";
+
 export const updateTodos = (id, name) => (dispatch) => {
     return fetch(`http://localhost:3005/todos/${id}`, {
         method: "PUT",
@@ -10,7 +12,7 @@ export const updateTodos = (id, name) => (dispatch) => {
         .then((response) => {
             console.log("Задача обновлена, ответ сервера:", response);
             dispatch({
-                type: "UPDATE_TODOS",
+                type: ACTION_TYPE.UPDATE_TODOS,
                 payload: { response },
             });
         });

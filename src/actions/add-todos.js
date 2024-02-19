@@ -1,3 +1,5 @@
+import { ACTION_TYPE } from "../constants/action-type";
+
 export const addTodos = (value) => (dispatch) => {
     return fetch("http://localhost:3005/todos", {
         method: "POST",
@@ -10,7 +12,7 @@ export const addTodos = (value) => (dispatch) => {
         .then((response) => {
             console.log("Новая задача добавлена, ответ сервера:", response);
             dispatch({
-                type: "ADD_TODOS",
+                type: ACTION_TYPE.GET_TODOS,
                 payload: { response },
             });
         });
