@@ -1,3 +1,4 @@
+import { ACTION_TYPE } from "../../constants/action-type";
 import styles from "./SearchComponent.module.css";
 import { useDispatch } from "react-redux";
 
@@ -6,7 +7,7 @@ export const SearchComponent = () => {
 
     const updateSearchState = (value) => {
         dispatch({
-            type: "UPDATE_SEARCH",
+            type: ACTION_TYPE.UPDATE_SEARCH,
             payload: value,
         });
     };

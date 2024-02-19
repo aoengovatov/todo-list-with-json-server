@@ -13,7 +13,7 @@ export const updateTodos = (id, name) => (dispatch) => {
             console.log("Задача обновлена, ответ сервера:", response);
             dispatch({
                 type: ACTION_TYPE.UPDATE_TODOS,
-                payload: { response },
+                payload: response,
             });
         });
 };

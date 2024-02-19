@@ -12,8 +12,8 @@ export const addTodos = (value) => (dispatch) => {
         .then((response) => {
             console.log("Новая задача добавлена, ответ сервера:", response);
             dispatch({
-                type: ACTION_TYPE.GET_TODOS,
-                payload: { response },
+                type: ACTION_TYPE.ADD_TODOS,
+                payload: response,
             });
         });
 };

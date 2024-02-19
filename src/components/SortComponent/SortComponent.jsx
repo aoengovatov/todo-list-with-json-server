@@ -1,3 +1,4 @@
+import { ACTION_TYPE } from "../../constants/action-type";
 import styles from "./SortComponent.module.css";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -7,7 +8,7 @@ export const SortComponent = () => {
 
     const updateSortValue = (value) => {
         dispatch({
-            type: "UPDATE_SORT",
+            type: ACTION_TYPE.UPDATE_SORT,
             payload: value,
         });
     };
